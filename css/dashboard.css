@@ -1,0 +1,253 @@
+
+*{
+
+	margin: 0;
+	padding: 0;
+	font-family: tahoma;
+}
+#graficos li{
+    display: inline-block;
+}
+input#btMenu:checked ~ #menu {
+    margin-left: -163px;
+}
+input#btMenu:checked ~ #conteudo {
+    margin-left: 51px;
+}
+
+#btMenu{
+    display: none;
+}
+.miniMenu{
+    cursor: pointer;
+    font-size: 20px;
+    margin-left: 8px;
+    display: table-caption !important;
+}
+.miniMenu:hover{
+    color: white;
+}
+
+#cabecalho{
+
+	height: 32px;
+    width: 100%;
+    background: white;
+    padding: 20px;
+    display: fixed;
+   
+    box-shadow: 0 0.25rem 0.125rem 0 rgba(0, 0, 0, 0.33);
+
+}
+#menu{
+
+	height: 570px;
+    width: 162px;
+    background: #15aabf;
+    padding: 20px;
+    text-align: right;
+    transition: 0.3s;
+}
+div#piechart, #piechart_3d {
+    margin-top: -3px;
+    border: 3px solid #15aabf;
+    border-radius: 7px;
+}
+h1 {
+    padding: 16px;
+}
+h2{
+	color: #495057;
+	margin-left: 31px;
+}
+span.paginas {
+    padding: 4px;
+    background: #07dea6;
+    margin-top: 6px;
+    display: table-caption;
+    border-radius: 5px;
+    border: none;
+}
+span.paginas:hover{
+
+        background:white;
+}
+span.paginas a{
+    color: white;
+}
+section#conteudo {
+        
+    width: max-content;
+    height: 471px;
+    position: sticky;
+    margin-top: -599px;
+    margin-left: 202px;
+    padding: 10px;
+    text-align: left;
+    transition: 0.3s;
+}
+
+form, #interface_assist{
+    background-image: linear-gradient(45deg, #03A9F4, #09a77b);
+    padding: 12px;
+    border-radius: 7px;
+}
+
+footer#rodape {
+   height: 32px;
+    width: 100%;
+    background: #212529;
+    padding: 20px;
+    color: #868e96;
+    text-align: center;
+    border: 1px solid gray;
+    margin-top: 108px;}
+ul{
+	list-style-type: none;
+}
+#conteudo a{
+    color: black;
+    border-bottom: 2px solid #07dea6;
+}
+#menu li a{
+
+	text-decoration: none;
+	color: white;
+}
+span.icons {
+    margin-left: 14px;
+}
+#menu li a:hover{
+	color: #09476b;
+}
+
+#menu li{
+
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+}
+    
+a{
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+}
+img:hover{
+    filter: grayscale(70%);
+        
+}
+
+/*estilo*/
+
+input[type="text"],select, input[type="date"], input[type="password"], input[type='mail']{
+	border-radius: 7px;
+	padding: 10px;
+	border:none;
+	margin-bottom: 10px;
+    text-transform: uppercase;
+}
+fieldset{
+	padding: 10px;
+	border-radius: 7px;
+	border: 1px solid white;
+}
+#lista:hover{
+    background:#ffffff7d;
+
+}
+#lista{
+    border: 1px solid;
+    text-align: center;
+}
+
+.acoes{
+  width: 29px;
+    filter: grayscale(0);
+    margin-top: 0;
+    font-size: 22px;
+}
+.acoes:hover{
+    color:red;
+}
+#lista td{
+    border: 1px solid;
+}
+.aceito{
+    color: green;
+    font-weight: bold;
+}
+.recusado{
+    color: #c93636;
+      font-weight: bold;
+}
+.aguardando{
+    color: orange;
+      font-weight: bold;
+}
+button#btnAdm:hover {
+    background: #0aad82;
+}
+#btnAdm {
+    /* width: 200px; */
+    border-radius: 7px;
+    border: none;
+    background: #07dea6;
+    padding: 10px;
+    /* margin-top: 20px; */
+    cursor: pointer;
+    font-family: tahoma;
+    font-size: 17px;
+    margin-left: 25px;
+    margin-bottom: 10px;
+}
+img {
+    width: 124px;
+    margin-top: 30px;
+    filter: grayscale(50%);
+    transition: 0.3s;
+    
+}
+img:hover{
+    filter: grayscale(70%);
+}
+table td {
+    width: max-content;
+    height: 32px;
+    border-collapse: collapse;
+    border: none;
+    padding: 4px;
+}
+#titulo{
+    text-align: center;
+    background:#15aabf;
+   
+}
+table{
+    border-collapse: collapse;
+}
+#btn{
+    width: 200px;
+    border-radius: 7px;
+    border: none;
+    background:#07dea6;
+    padding: 10px;
+    margin-top:20px;
+    cursor: pointer;
+    font-family: tahoma;
+    font-size: 17px;
+
+}
+#btn:hover{
+    background:white;
+    
+}
+textarea{
+    width: 356px;
+    border-radius: 7px;
+    padding: 10px;
+    border:none;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}

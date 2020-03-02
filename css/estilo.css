@@ -1,0 +1,243 @@
+*{
+
+	margin: 0 auto;
+	padding: 0;
+}
+
+body{
+
+	font-family: tahoma;
+	width: 100vw;
+	height:100vh;
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	justify-content: center;
+	/*background-image:linear-gradient(45rad, #c8f3e9,#93a272);*/
+	 background-image: linear-gradient(45deg, #03A9F4, #09a77b);
+     padding-top: 7px;
+    padding-bottom: 7px;
+	
+
+
+}
+
+input[type="text"],select, input[type="date"], input[type="password"], input[type='email']{
+	border-radius: 7px;
+	padding: 10px;
+	border:none;
+	margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+#interface h1{
+	margin-bottom: 20px;
+	color: black;
+	border-bottom: 1px solid white;
+}
+fieldset{
+	padding: 10px;
+	border-radius: 7px;
+	border: 1px solid white;
+}
+
+textarea{
+	width: 356px;
+	border-radius: 7px;
+	padding: 10px;
+	border:none;
+	margin-bottom: 10px;
+    text-transform: uppercase;
+}
+#btn{
+	width: 200px;
+	border-radius: 7px;
+	border: none;
+	background:#07dea6;
+	padding: 10px;
+	margin-top:20px;
+	cursor: pointer;
+	font-family: tahoma;
+	font-size: 17px;
+
+}
+#btn:hover{
+	background:white;
+	
+}
+#interface_login{
+
+    width: 300px;
+    height: 363px;
+    border-radius: 7px;
+    border:2px solid white;
+    padding: 10px;
+   /*background-image: linear-gradient(45deg, #03A9F4, #09a77b);*/
+   font-family: 'Montserrat', sans-serif;
+   background: #ffffff70;
+
+
+   }
+   #interface_login_adm{
+
+    width: 300px;
+    height: 363px;
+    border-radius: 7px;
+    border:2px solid white;
+    padding: 10px;
+   /*background-image: linear-gradient(45deg, #03A9F4, #09a77b);*/
+   font-family: 'Montserrat', sans-serif;
+   background: #00000024;
+
+
+   }
+   h1.tituloLogin {
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    font-size: 29px;
+    margin-bottom: 36px;
+}
+#formLogin input[type="text"], input[type="password"]{
+    width: 250px;
+    padding: 8px;
+    border-radius: 7px;
+    border: none;
+    margin-bottom: 13px;
+    margin-left: 18px;
+    background: white;
+    border-bottom: 1px solid white;
+    font-family: 'Montserrat', sans-serif;
+    color: black;
+}
+#formLoginAdmin input[type="text"], input[type="password"]{
+    width: 250px;
+    padding: 8px;
+    border-radius: 7px;
+    border: none;
+    margin-bottom: 13px;
+    margin-left: 18px;
+    background: white;
+    border-bottom: 1px solid white;
+    font-family: 'Montserrat', sans-serif;
+    color: black;
+}
+button.btnEntrar {
+    background: #2a3747;
+    width: 200px;
+    padding: 12px;
+    color: white;
+    border-radius: 21px;
+    border: none;
+    margin-left: 52px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+}
+p {
+    text-align: center;
+    font-size: 13px;
+    font-family: sans-serif;
+    color: white;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+}
+
+a{
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+}
+.btnEntrar:hover{
+    background:#ccc;
+    color: black;
+
+}
+#menu ul{
+list-style-type: none;
+
+}
+#menu ul li{
+    width: 200px;
+    height: 200px;
+    padding: 10px;
+    border-radius: 7px;
+    background:#d2d1d161;
+    display: inline-block;
+    text-align: center;
+}
+#menu ul li:hover{
+    background:#ffffff78;
+    color: black;
+}
+
+img {
+    width: 124px;
+    margin-top: 30px;
+    filter: grayscale(50%);
+    transition: 0.3s;
+    
+}
+img:hover{
+    filter: grayscale(70%);
+}
+table td {
+    width: max-content;
+    height: 32px;
+    border-collapse: collapse;
+    border: none;
+    padding: 4px;
+}
+#titulo{
+    text-align: center;
+    background:aliceblue;
+   
+}
+table{
+    border-collapse: collapse;
+}
+#lista:hover{
+    background:#ffffff7d;
+
+}
+#lista{
+    border: 1px solid;
+    text-align: center;
+}
+
+.acoes{
+  width: 29px;
+    filter: grayscale(0);
+    margin-top: 0;
+}
+#lista td{
+    border: 1px solid;
+}
+.aceito{
+    color: green;
+    font-weight: bold;
+}
+.recusado{
+    color: #c93636;
+      font-weight: bold;
+}
+.aguardando{
+    color: orange;
+      font-weight: bold;
+}
+#btnAdm {
+    /* width: 200px; */
+    border-radius: 7px;
+    border: none;
+    background: #07dea6;
+    padding: 10px;
+    /* margin-top: 20px; */
+    cursor: pointer;
+    font-family: tahoma;
+    font-size: 17px;
+    margin-left: 25px;
+    margin-bottom: 10px;
+}
