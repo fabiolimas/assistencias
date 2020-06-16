@@ -102,7 +102,7 @@
 
                     }
                     
-                    echo"<td><a href='alterar_assistencia.php?id=$id'><span class='far fa-edit acoes' title='Editar'></span></a>|<a href='excluir_assistencia.php?id=$id'><span class='far fa-trash-alt acoes' title='Excluir'></span></a>|<a href='visualizar_assistencia.php?id=$id'><span class='far fa-eye acoes' title='Visualizar'></span></a></td>";
+                    echo"<td><a href='alterar_assistencia.php?id=$id'><span class='far fa-edit acoes' title='Editar'></span></a>|<a href='excluir_assistencia.php?id=$id'><span class='far fa-trash-alt acoes' title='Excluir'></span></a>|<a href='visualizar.php?id=$id'><span class='far fa-eye acoes' title='Visualizar'></span></a></td>";
                     echo"</tr>";
                 }
 

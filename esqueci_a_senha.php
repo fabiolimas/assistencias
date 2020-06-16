@@ -33,7 +33,7 @@
       <fieldset><legend>Confirme seu E-mail</legend>
     
      E-mail:
-    <input type="mail" title="Digite aqui o email que foi cadastrado em sua conta" name="email"  title="Email" size="34" placeholder="Email vinculado a conta" required autocomplete="off"><br><br>
+    <input type="email" title="Digite aqui o email que foi cadastrado em sua conta" name="email"  title="Email" size="34" placeholder="Email vinculado a conta" required autocomplete="off"><br><br>
          
     </fieldset>
     

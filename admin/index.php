@@ -10,6 +10,8 @@
 
 include ("../conexao.php");
 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -60,9 +62,9 @@ include ("../conexao.php");
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
+    
       google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-      
+      google.charts.setOnLoadCallback(drawChart);      
       function drawChart() {
         
 
@@ -73,29 +75,27 @@ include ("../conexao.php");
            
               $lojas="SELECT * from lojas";
                 $query_lojas=mysqli_query($con, $lojas);
-
-                while($lojas=mysqli_fetch_array($query_lojas)){
-                  $loja=$lojas['loja'];
-                  $id_loja=$lojas['id_loja'];                 
+              
+            
+                while($lojass=mysqli_fetch_array($query_lojas)){
+                  $loja=$lojass['loja'];
+                  $id_loja=$lojass['id_loja'];                 
                 
-
-              $teste="SELECT g.id, g.id_loja, l.loja, COUNT(*) as contador FROM garantias as g  join lojas as l on l.id_loja= g.id_loja where g.id_loja='$id_loja'";
+              
+              $teste="SELECT  g.id_loja, l.loja, COUNT(*) as contadorl FROM garantias as g  join lojas as l on l.id_loja= g.id_loja where g.id_loja='$id_loja' group by g.id_loja";
               
        
-            $querys=mysqli_query($con, $teste);           
+            $querys=mysqli_query($con, $teste); 
+            $result=mysqli_num_rows($querys);
+
             
            
-            $rows=mysqli_num_rows($querys);
-
-            
 
             while($garantias=mysqli_fetch_array($querys)){
-              $loja=$garantias['loja'];
-
-              $contado=$garantias['contador'];              
-
+              $loja_nome=$garantias['loja'];
+              $contado=$garantias['contadorl'];   
     ?>
-          ["<?php echo $loja; ?>",   <?php echo $contado?>],
+          ["<?php echo $loja; ?>",   <?php echo $contado;?>],
           <?php }?>
             <?php }?>         
        
@@ -117,6 +117,8 @@ include ("../conexao.php");
 
      
     </script>
+   
+    
     <script type="text/javascript">
 
        //-------------------------Inicio Gráfico Marcas--------------------------------------//
@@ -144,8 +146,6 @@ include ("../conexao.php");
               
        
               $query=mysqli_query($con, $marcas);  
-              $registros=mysqli_num_rows($query);
-              
             
             while($marca=mysqli_fetch_array($query)){
               $marcas=mb_strtoupper($marca['marca']);

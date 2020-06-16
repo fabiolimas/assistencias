@@ -27,9 +27,9 @@
     Nome:
     <input type="text" name="nome" placeholder="Nome" title="Nome e Sobrenome" size="34" required><br><br>
     E-mail:
-    <input type="mail" name="email"  title="Email" size="34" required><br><br>
+    <input type="email" name="email"  title="Email" size="34" required><br><br>
     Telefone:
-    <input type="text" name="fone" placeholder="(XX)XXXX-XXXX" title="Telefone" size="34" required><br><br>
+    <input type="text" name="fone" placeholder="(XX)XXXX-XXXX" title="Telefone" size="31" required><br><br>
     </fieldset>
     <fieldset><legend>Permissão</legend>
     Nivel de Permissão:

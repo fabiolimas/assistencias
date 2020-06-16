@@ -1,48 +1,46 @@
 <?php
-    session_start();
-    if((!isset ($_SESSION['usuario']) == true) and (!isset ($_SESSION['senha']) == true))
+/*	session_start();
+	if((!isset ($_SESSION['usuario']) == true) and (!isset ($_SESSION['senha']) == true))
 {
   unset($_SESSION['usuario']);
   unset($_SESSION['senha']);
   header('location:login.php');
   }
+*/
 
-
-    include ("conexao.php");
+	include ("buscas.php");
 
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-      <link rel="stylesheet" type="text/css" href="fonts/css/all.css">
-    <link rel="stylesheet" type="text/css" href="css/dashboard.css">
-    <title>Assistências</title>
-</head>
-<body>
-    <div id="interface">
+
+	<div class="container interface">
+  <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Loja</th>
+      <th scope="col">Cliente</th>
+      <th scope="col">Cod. Mercadoria</th>
+      <th scope="col">Referencia</th>
+      <th scope="col">OS</th>
+      <th scope="col">Nota Fiscal</th>
+      <th scope="col">Data da Venda</th>
+      <th scope="col">Abertura de Chamado</th>
+      <th scope="col">Avaria</th>
+      <th scope="col">Status</th>
+      <th scope="col">Opções</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
     
         <?php
 
-            echo"<table>";
-            echo"<tr id='titulo'>";
-            echo"<td>Loja</td>";
-            echo"<td>Cod. Mercadoria</td>";
-            echo"<td>Descrição</td>";
-              echo"<td>OS</td>";
-            echo"<td>Nota Fiscal</td>";
-            echo"<td>Data da Venda</td>";
-            echo"<td>Abertura de chamado</td>";
-            echo"<td>Avaria</td>";
-            echo"<td>Status</td>";
-            echo"<td>Opções</td>";
-            echo"</tr>";
+           
 
 
             $os=isset($_POST['os'])?$_POST['os']:"";
 
-            $find="SELECT g.id, l.loja, g.id_mercadoria, g.descricao, g.os, g.nota_fiscal, g.data_venda, g.data_garantia, g.avaria,sg.status  FROM garantias as g join lojas as l on g.id_loja=l.id_loja join status_garantia as sg on g.id_status_garantia=sg.id_status  where g.os like '%$os%'";
+            $find="SELECT g.id, l.loja,g.cliente, g.id_mercadoria, g.descricao, g.os, g.nota_fiscal, g.data_venda, g.data_garantia, g.avaria,sg.status  FROM garantias as g join lojas as l on g.id_loja=l.id_loja join status_garantia as sg on g.id_status_garantia=sg.id_status  where g.os like '%$os%'";
             $query=mysqli_query($con, $find);
             $rows=mysqli_num_rows($query);
             
@@ -62,9 +60,11 @@
                     $data_chamado=$garantias['data_garantia'];
                     $avaria=$garantias['avaria'];
                     $status=$garantias['status'];
+                    $cliente=$garantias['cliente'];
 
                     echo"<tr id='lista'>";
                     echo"<td>".$loja."</td>";
+                    echo"<td>".$cliente."</td>";
                     echo"<td>".$mercadoria."</td>";
                     echo"<td>".$descricao."</td>";
                     echo"<td>".$os."</td>";
@@ -95,7 +95,7 @@
 
                     }
                     
-                    echo"<td><a href='alterar.php?id=$id'><span class='far fa-edit acoes'></span></a>|<a href='visualizar.php?id=$id'><span class='far fa-eye acoes'></span ></a></td>";
+                    echo"<td><a href='alterar.php?id=$id'><span class='far fa-edit acoes' title='Editar'></span></a><a href='visualizar.php?id=$id'><span class='far fa-eye acoes' title='Visualizar'></span ></a></td>";
                     echo"</tr>";
                 }
 

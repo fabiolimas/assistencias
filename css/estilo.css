@@ -29,6 +29,16 @@ input[type="text"],select, input[type="date"], input[type="password"], input[typ
 	margin-bottom: 10px;
     text-transform: uppercase;
 }
+.ficha {
+    background: white;
+    padding: 20px;
+    border-radius: 7px;
+    width: 646px;
+}
+fieldset.visualizacao {
+    border: 1px solid gray;
+    padding: 12px;
+}
 
 #interface h1{
 	margin-bottom: 20px;

@@ -1,19 +1,19 @@
 <?php
-  session_start();
+ /* session_start();
   if((!isset ($_SESSION['usuario']) == true) and (!isset ($_SESSION['senha']) == true))
 {
   unset($_SESSION['usuario']);
   unset($_SESSION['senha']);
   header('location:login.php');
   }
-
+*/
   include("conexao.php");
 
   include ("buscas.php");
 
   $id=$_GET['id'];
 
-  $find="SELECT g.id, l.loja, g.id_mercadoria, g.marca, g.descricao, g.os, g.nota_fiscal, g.data_venda, g.data_garantia, g.avaria,sg.status, sg.id_status FROM garantias as g join lojas as l on g.id_loja=l.id_loja join status_garantia as sg on g.id_status_garantia=sg.id_status  where g.id='$id'";
+  $find="SELECT g.id, l.loja,g.cliente,g.cpf, g.id_mercadoria, g.marca, g.descricao, g.os, g.nota_fiscal, g.data_venda, g.data_garantia, g.avaria,sg.status, sg.id_status FROM garantias as g join lojas as l on g.id_loja=l.id_loja join status_garantia as sg on g.id_status_garantia=sg.id_status  where g.id='$id'";
             $query=mysqli_query($con, $find);
             $rows=mysqli_num_rows($query);
 
@@ -34,6 +34,8 @@
                     $avaria=$garantias['avaria'];
                     $status=$garantias['status'];
                     $id_status=$garantias['id_status'];
+                    $cliente=$garantias['cliente'];
+                    $cpf=$garantias['cpf'];
                   }}else{
                     echo "Erro: ".mysqli_error($con);
                   }
@@ -43,38 +45,86 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" type="text/css" href="css/estilo.css">
-  <title>Assistencias</title>
+	<title>Imagem Foto</title>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="shortcut icon" href="image/favicon.ico" />
+	<script src="https://kit.fontawesome.com/cd1b9a04c6.js" crossorigin="anonymous"></script>
+	<meta charset="utf-8">
+	<!-- GetButton.io widget -->
+<script type="text/javascript">
+(function () {
+var options = {
+whatsapp: "+55(74)991381274", // WhatsApp number
+call_to_action: "Fale conosco", // Call to action
+position: "right", // Position may be 'right' or 'left'
+message:"Olá Mundo",
+logo:"image/logo.png",};
+var proto = document.location.protocol, host = "getbutton.io", url = proto + "//static." + host;
+var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
+s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
+var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+})();
+</script>
+<!-- /GetButton.io widget --> 
+
+
 </head>
-<body>
-  <div id="interface">
+<body class="fluid-container">
+
+	<header class="col-12 cabecalho">
+		<div class="col-3 logo"><a href="../index.php"><img src="image/logo.png"></a></div>	
+		
+		<input type="checkbox" id="check">
+		<label for="check" class="menuresp"><span class="fas fa-bars barras"></span></label>
+		<ul class="nav">
+			<li class="nav-item"><a class="nav-link" href='../login.php'>Envio de Arquivos</a></li>
+			<li class="nav-item"><a class="nav-link" href="../opcoes.php">Encadernadora</a></li>
+			<li class="nav-item"><a  class="nav-link" href="#">Molduraria</a></li>
+			<li class="nav-item"><a  class="nav-link" href="https://www.fotoimagem.com.br" target="_blank">Site Foto Imagem </a></li>
+			<li class="nav-item"><a  class="nav-link" href="assistencia.php">Assistências Ótica</a></li>
+			
+		</ul>
+
+
+	</header>
+	<div class="container interface">
+		<section class="col-lg-8 col-sd-12 container">
     <a href="index.php">Voltar</a>
-  <h1>Nova Assistencia</h1>
+  <h1>Alterar Assistencia</h1>
+  <hr>
+  <div class="col-lg-6 col-sd-12">
 
   <form method="post" action="processa_alteracao.php">
     <input type="hidden" name="id" value="<?php echo $id;?>">
+    <fieldset><legend>Dados do Cliente</legend>
+		Nome
+		<input type="text" class="form-control" name="cliente" placeholder="Nome Completo" title="Nome Completo" size="40" value="<?php echo $cliente;?>" >
+		CPF:
+		<input type="text" class="form-control" name="cpf"  title="Informe o CPF" size="15" maxlength="11" value="<?php echo $cpf;?>">
+		<br>
+		</fieldset><br>
     
-    Loja: <input type="text" name="loja" value="<?php echo $loja;?>" readOnly>
+    Loja: <input type="text" class="form-control" name="loja" value="<?php echo $loja;?>" readOnly>
     <fieldset><legend>Dados da Venda</legend>
     Código da Peça: 
 
-    <input type="text" name="codigo_mercadoria" placeholder="Código interno" title="Código do Goldbiz" size="10"  value="<?php echo $mercadoria;?>">
+    <input type="text" class="form-control" name="codigo_mercadoria" placeholder="Código interno" title="Código do Goldbiz" size="10"  value="<?php echo $mercadoria;?>">
     Marca:
-    <input type="text" name="marca"  title="Marca da Peça" size="10" value="<?php echo $marca;?>">
+    <input type="text" class="form-control" name="marca"  title="Marca da Peça" size="10" value="<?php echo $marca;?>">
     Descrição:
-    <input type="text" title=" Descrição com referencia da peça" name="descricao" size="40" value="<?php echo $descricao;?>">
+    <input type="text" class="form-control" title=" Descrição com referencia da peça" name="descricao" size="40" value="<?php echo $descricao;?>">
     OS:
-    <input type="text" name="os" title="OS da venda" size="10" value="<?php echo $os;?>">
+    <input type="text" class="form-control" name="os" title="OS da venda" size="10" value="<?php echo $os;?>">
     Nota Fiscal Nº:
-    <input type="text" name="nota_fiscal" title="Número da nota fiscal" size="10" value="<?php echo $nota;?>"><br>
+    <input type="text" class="form-control" name="nota_fiscal" title="Número da nota fiscal" size="10" value="<?php echo $nota;?>"><br>
     
     Data da Venda:
-    <input type="date" name="data_venda" title="Data da venda" size="15" value="<?php echo $data_venda;?>"><br>
+    <input type="date" class="form-control" name="data_venda" title="Data da venda" size="15" value="<?php echo $data_venda;?>"><br>
     </fieldset><br>
     <fieldset><legend>Abertura de Assistencia</legend>
     Data Pedido de Garantia:
-    <input type="date" name="data_garantia" title="Data da abertura da garantia" size="15" value="<?php echo $data_chamado;?>">
+    <input type="date" class="form-control" name="data_garantia" title="Data da abertura da garantia" size="15" value="<?php echo $data_chamado;?>">
     <!--Status Fornecedor:
     <select name="status_fornecedor" value="" required>
 
@@ -100,7 +150,7 @@
 
     </select>-->
     Status Garantia:
-    <select name="status_garantia" value="" required>
+    <select class="form-control" name="status_garantia" value="" required>
 
       <option value="<?php echo $id_status;?>"><?php echo $status;?></option>
       <?php
@@ -124,14 +174,16 @@
 
     </select><br>
 
-    Avaria:<br><textarea title="Até 200 caracteres" name="avaria"  maxlength="200" ><?php echo $avaria;?></textarea><br>
+    Avaria:<br><textarea class="form-control" title="Até 200 caracteres" name="avaria"  maxlength="200" ><?php echo $avaria;?></textarea><br>
     </fieldset>
 
-    <input type="submit" name="" Value="Alterar" id="btn">
+    <button type="submit" class="btn btn-primary"  id='bt1' name="up" >Alterar</button>
 
   
 
   </form>
+  </div>
+		</section>
 </div>
 </body>
 </html>
