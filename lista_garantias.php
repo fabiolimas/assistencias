@@ -40,7 +40,7 @@
 
             $os=isset($_POST['os'])?$_POST['os']:"";
 
-            $find="SELECT g.id, l.loja,g.cliente, g.id_mercadoria, g.descricao, g.os, g.nota_fiscal, g.data_venda, g.data_garantia, g.avaria,sg.status  FROM garantias as g join lojas as l on g.id_loja=l.id_loja join status_garantia as sg on g.id_status_garantia=sg.id_status  where g.os like '%$os%'";
+            $find="SELECT g.id, l.loja,g.cliente, g.id_mercadoria, g.descricao, g.os, g.nota_fiscal, g.data_venda, g.data_garantia, g.avaria,sg.status  FROM garantias as g join lojas as l on g.id_loja=l.id_loja join status_garantia as sg on g.id_status_garantia=sg.id_status  where g.os like '%$os%' or cliente like '%$os%'";
             $query=mysqli_query($con, $find);
             $rows=mysqli_num_rows($query);
             
@@ -90,6 +90,10 @@
                         echo"<td><span class='recusado'>".$status."</span></td>";
 
                         break;
+                        case "Pendencia":
+                          echo"<td><span class='pendencia'>".$status."</span></td>";
+  
+                          break;
 
 
 

@@ -75,9 +75,10 @@
 		$data_garantia=$_POST['data_garantia'];
 		//$status_forn=$_POST['status_fornecedor'];
 		$status_garantia=$_POST['status_garantia'];
-		$avaria=mb_strtoupper($_POST['avaria']);
+        $avaria=mb_strtoupper($_POST['avaria']);
+        $pendencia=mb_strtoupper($_POST['pendencia']);
 
-		$merge="UPDATE `garantias` SET id_mercadoria='$mercadoria', marca='$marca', descricao='$descricao', os='$os', nota_fiscal='$nota_fiscal', data_venda='$data_venda', data_garantia='$data_garantia', id_status_garantia='$status_garantia', avaria='$avaria' where id='$id'";
+		$merge="UPDATE `garantias` SET id_mercadoria='$mercadoria', marca='$marca', descricao='$descricao', os='$os', nota_fiscal='$nota_fiscal', data_venda='$data_venda', data_garantia='$data_garantia', id_status_garantia='$status_garantia', avaria='$avaria', pendencia='$pendencia' where id='$id'";
 		$query_persist=mysqli_query($con, $merge);
 
 		if($query_persist){

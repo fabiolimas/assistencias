@@ -186,6 +186,10 @@ fieldset{
     color: orange;
       font-weight: bold;
 }
+.pendencia{
+    color:#b70606;
+      font-weight: bold;
+}
 button#btnAdm:hover {
     background: #0aad82;
 }

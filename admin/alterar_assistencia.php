@@ -13,7 +13,7 @@
 
     $id=$_GET['id'];
 
-  $find="SELECT g.id, l.loja, g.id_mercadoria, g.marca,g.descricao, g.os, g.nota_fiscal, g.data_venda, g.data_garantia, g.avaria,sg.status, sg.id_status FROM garantias as g join lojas as l on g.id_loja=l.id_loja join status_garantia as sg on g.id_status_garantia=sg.id_status  where g.id='$id'";
+  $find="SELECT g.id, l.loja, g.id_mercadoria, g.marca,g.descricao, g.os, g.nota_fiscal, g.data_venda, g.data_garantia, g.avaria,sg.status, sg.id_status, g.pendencia FROM garantias as g join lojas as l on g.id_loja=l.id_loja join status_garantia as sg on g.id_status_garantia=sg.id_status  where g.id='$id'";
             $query=mysqli_query($con, $find);
             $rows=mysqli_num_rows($query);
 
@@ -34,6 +34,7 @@
                     $avaria=$garantias['avaria'];
                     $status=$garantias['status'];
                     $id_status=$garantias['id_status'];
+                    $pendencia=isset($garantias['pendencia'])?$garantias['pendencia']:" ";
                   }}else{
                     echo "Erro: ".mysqli_error($con);
                   }
@@ -103,6 +104,7 @@
     <input type="date" name="data_venda" title="Data da venda" size="15" value="<?php echo $data_venda;?>"><br>
     </fieldset><br>
     <fieldset><legend>Abertura de Assistência</legend>
+
     Data Pedido de Garantia:
     <input type="date" name="data_garantia" title="Data da abertura da garantia" size="15" value="<?php echo $data_chamado;?>">
     <!--Status Fornecedor:
@@ -153,7 +155,7 @@
 
 
     </select><br>
-
+    Pendencia:<br><textarea title="Até 200 caracteres" name="pendencia"  maxlength="200"><?php echo $pendencia;?></textarea><br>
     Avaria:<br><textarea title="Até 200 caracteres" name="avaria"  maxlength="200"><?php echo $avaria;?></textarea><br>
     </fieldset>
 

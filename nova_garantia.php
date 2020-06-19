@@ -38,7 +38,7 @@ var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s,
 </script>
 <!-- /GetButton.io widget --> 
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
 <body class="fluid-container">
 
@@ -52,7 +52,7 @@ var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s,
 			<li class="nav-item"><a class="nav-link" href="../opcoes.php">Encadernadora</a></li>
 			<li class="nav-item"><a  class="nav-link" href="#">Molduraria</a></li>
 			<li class="nav-item"><a  class="nav-link" href="https://www.fotoimagem.com.br" target="_blank">Site Foto Imagem </a></li>
-			<li class="nav-item"><a  class="nav-link" href="assistencia.php">Assistências Ótica</a></li>
+			<li class="nav-item"><a  class="nav-link" href="index.php">Assistências Ótica</a></li>
 			
 		</ul>
 
@@ -64,7 +64,7 @@ var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s,
 	<h1>Nova Assistência</h1>
 	<hr>
 	<div class="col-lg-6 col-sd-12">
-	<form method="post" action="processa_garantia.php">
+	<form method="post" action="processa_garantia.php" enctype="multipart/form-data">
 
 	
 		
@@ -107,7 +107,7 @@ var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s,
 		Referencia:
 		<input type="text" class="form-control" title=" Descrição com referencia da peça" name="descricao" size="40" required>
 		OS:
-		<input type="text" class="form-control" name="os" title="OS da venda" size="10" required>
+		<input type="text" class="form-control" name="os" title="OS da venda" size="10" >
 		Nota Fiscal Nº:
 		<input type="text" class="form-control" name="nota_fiscal" title="Número da nota fiscal" size="10" required><br>
 		
@@ -116,7 +116,7 @@ var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s,
 		</fieldset><br>
 		<fieldset><legend>Abertura de Assistência</legend>
 		Data Pedido de Garantia:
-		<input type="date" class="form-control" name="data_garantia" title="Data da abertura da garantia" size="15" required>
+		<input type="date" class="form-control" name="data_garantia" title="Data da abertura da garantia" size="15" required><br>
 		<!--Status Fornecedor:
 		<select name="status_fornecedor" value="" required>
 
@@ -141,6 +141,14 @@ var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s,
 
 
 		</select>-->
+		Anexar imagens:<br><sub style="color:red;">Anexar nota fiscal e fotos da mercadoria avariada</sub><br>
+		<input type="file" name ="arquivo[]" accept ="image/*" multiple id="addFotoGaleria" required>
+    
+    <br><br>
+    
+
+	
+	<div class="galeria"></div><br>
 		Status Assistência:
 		<select class="form-control" name="status_garantia" value="" id='stat_garantia'  required>
 
@@ -180,6 +188,34 @@ var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s,
 	</div>
 		</section>
 </div>
+<script>
+
+$(function() {
+// Pré-visualização de várias imagens no navegador
+var visualizacaoImagens = function(input, lugarParaInserirVisualizacaoDeImagem) {
+
+    if (input.files) {
+        var quantImagens = input.files.length;
+
+        for (i = 0; i < quantImagens; i++) {
+            var reader = new FileReader();
+
+            reader.onload = function(event) {
+                $($.parseHTML('<img class="miniatura">')).attr('src', event.target.result).appendTo(lugarParaInserirVisualizacaoDeImagem);
+            }
+
+            reader.readAsDataURL(input.files[i]);
+        }
+    }
+
+};
+
+$('#addFotoGaleria').on('change', function() {
+    visualizacaoImagens(this, 'div.galeria');
+});
+});
+
+    </script>
 
 </body>
 </html>

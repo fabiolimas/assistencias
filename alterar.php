@@ -13,7 +13,7 @@
 
   $id=$_GET['id'];
 
-  $find="SELECT g.id, l.loja,g.cliente,g.cpf, g.id_mercadoria, g.marca, g.descricao, g.os, g.nota_fiscal, g.data_venda, g.data_garantia, g.avaria,sg.status, sg.id_status FROM garantias as g join lojas as l on g.id_loja=l.id_loja join status_garantia as sg on g.id_status_garantia=sg.id_status  where g.id='$id'";
+  $find="SELECT g.id, l.loja,g.cliente,g.cpf, g.id_mercadoria, g.marca, g.descricao, g.os, g.nota_fiscal, g.data_venda, g.data_garantia, g.avaria,sg.status, sg.id_status, g.pendencia FROM garantias as g join lojas as l on g.id_loja=l.id_loja join status_garantia as sg on g.id_status_garantia=sg.id_status  where g.id='$id'";
             $query=mysqli_query($con, $find);
             $rows=mysqli_num_rows($query);
 
@@ -36,6 +36,7 @@
                     $id_status=$garantias['id_status'];
                     $cliente=$garantias['cliente'];
                     $cpf=$garantias['cpf'];
+                    $pendencia=$garantias['pendencia'];
                   }}else{
                     echo "Erro: ".mysqli_error($con);
                   }
@@ -68,7 +69,7 @@ var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s,
 </script>
 <!-- /GetButton.io widget --> 
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
 <body class="fluid-container">
 
@@ -82,11 +83,11 @@ var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s,
 			<li class="nav-item"><a class="nav-link" href="../opcoes.php">Encadernadora</a></li>
 			<li class="nav-item"><a  class="nav-link" href="#">Molduraria</a></li>
 			<li class="nav-item"><a  class="nav-link" href="https://www.fotoimagem.com.br" target="_blank">Site Foto Imagem </a></li>
-			<li class="nav-item"><a  class="nav-link" href="assistencia.php">Assistências Ótica</a></li>
+			<li class="nav-item"><a  class="nav-link" href="assistencia">Assistências Ótica</a></li>
 			
 		</ul>
 
-
+    
 	</header>
 	<div class="container interface">
 		<section class="col-lg-8 col-sd-12 container">
@@ -95,7 +96,7 @@ var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s,
   <hr>
   <div class="col-lg-6 col-sd-12">
 
-  <form method="post" action="processa_alteracao.php">
+  <form method="post" action="processa_alteracao.php" enctype="multipart/form-data">
     <input type="hidden" name="id" value="<?php echo $id;?>">
     <fieldset><legend>Dados do Cliente</legend>
 		Nome
@@ -120,11 +121,13 @@ var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s,
     <input type="text" class="form-control" name="nota_fiscal" title="Número da nota fiscal" size="10" value="<?php echo $nota;?>"><br>
     
     Data da Venda:
-    <input type="date" class="form-control" name="data_venda" title="Data da venda" size="15" value="<?php echo $data_venda;?>"><br>
+    <input type="date" class="form-control" name="data_venda" title="Data da venda" size="15" value="<?php echo $data_venda;?>" readonly><br>
     </fieldset><br>
     <fieldset><legend>Abertura de Assistencia</legend>
+
+
     Data Pedido de Garantia:
-    <input type="date" class="form-control" name="data_garantia" title="Data da abertura da garantia" size="15" value="<?php echo $data_chamado;?>">
+    <input type="date" class="form-control" name="data_garantia" title="Data da abertura da garantia" size="15" value="<?php echo $data_chamado;?>" readonly>
     <!--Status Fornecedor:
     <select name="status_fornecedor" value="" required>
 
@@ -148,7 +151,7 @@ var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s,
       ?>
 
 
-    </select>-->
+    </select>
     Status Garantia:
     <select class="form-control" name="status_garantia" value="" required>
 
@@ -172,7 +175,18 @@ var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s,
       ?>
 
 
-    </select><br>
+    </select><br>-->
+    Anexar imagens:<br><sub style="color:red;">Anexar nota fiscal e fotos da mercadoria avariada</sub><br>
+		<input type="file" name ="arquivo[]" accept ="image/*" multiple id="addFotoGaleria" required>
+    
+    <br><br>
+    
+
+	
+	<div class="galeria"></div><br>
+    Status:<input type="text" class="form-control" name="status_garantia" value="<?php echo $status?>" readonly><br>
+
+    Pendencia:<br><textarea class="form-control" title="Até 200 caracteres" name="pendencia"  maxlength="200" readonly style="color: red;"><?php echo $pendencia;?></textarea><br>
 
     Avaria:<br><textarea class="form-control" title="Até 200 caracteres" name="avaria"  maxlength="200" ><?php echo $avaria;?></textarea><br>
     </fieldset>
@@ -185,5 +199,33 @@ var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s,
   </div>
 		</section>
 </div>
+<script>
+
+$(function() {
+// Pré-visualização de várias imagens no navegador
+var visualizacaoImagens = function(input, lugarParaInserirVisualizacaoDeImagem) {
+
+    if (input.files) {
+        var quantImagens = input.files.length;
+
+        for (i = 0; i < quantImagens; i++) {
+            var reader = new FileReader();
+
+            reader.onload = function(event) {
+                $($.parseHTML('<img class="miniatura">')).attr('src', event.target.result).appendTo(lugarParaInserirVisualizacaoDeImagem);
+            }
+
+            reader.readAsDataURL(input.files[i]);
+        }
+    }
+
+};
+
+$('#addFotoGaleria').on('change', function() {
+    visualizacaoImagens(this, 'div.galeria');
+});
+});
+
+    </script>
 </body>
 </html>

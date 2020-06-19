@@ -29,6 +29,32 @@ input[type="text"],select, input[type="date"], input[type="password"], input[typ
 	margin-bottom: 10px;
     text-transform: uppercase;
 }
+.miniatura {
+    height: 75px;
+    border: 1px solid #000;
+    margin: 10px 5px 0 0;
+  }
+  .miniatura img{
+    margin-left: 25px;
+    transition: .5s;
+
+  }
+  
+  span.mini {
+    width: 100px;
+    padding: 10px;
+    border-radius: 7px;
+    border: 1px solid gray;
+    display: table-cell;
+}.mini img{
+    transition: .3s;
+}
+.mini img:hover{
+   
+        transform: scale(1.2);
+    
+    
+}
 .ficha {
     background: white;
     padding: 20px;
@@ -236,6 +262,10 @@ table{
 }
 .aguardando{
     color: orange;
+      font-weight: bold;
+}
+.pendencia{
+    color:gray;
       font-weight: bold;
 }
 #btnAdm {

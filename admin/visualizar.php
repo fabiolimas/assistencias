@@ -28,7 +28,7 @@
 <?php		
 		$id=$_GET['id'];
 
-$find="SELECT g.id, l.loja,g.cliente,g.cpf, g.id_mercadoria, g.marca, g.descricao, g.os, g.nota_fiscal, g.data_venda, g.data_garantia, g.avaria,sg.status, sg.id_status FROM garantias as g join lojas as l on g.id_loja=l.id_loja join status_garantia as sg on g.id_status_garantia=sg.id_status  where g.id='$id'";
+$find="SELECT g.id, l.loja,g.cliente,g.cpf, g.id_mercadoria, g.marca, g.descricao, g.os, g.nota_fiscal, g.data_venda, g.data_garantia, g.avaria,sg.status, sg.id_status, g.pendencia FROM garantias as g join lojas as l on g.id_loja=l.id_loja join status_garantia as sg on g.id_status_garantia=sg.id_status  where g.id='$id'";
 		  $query=mysqli_query($con, $find);
 		  $rows=mysqli_num_rows($query);
 
@@ -51,6 +51,8 @@ $find="SELECT g.id, l.loja,g.cliente,g.cpf, g.id_mercadoria, g.marca, g.descrica
 				  $id_status=$garantias['id_status'];
 				  $cliente=$garantias['cliente'];
 				  $cpf=$garantias['cpf'];
+				  $pendencia=isset($garantias['pendencia'])?$garantias['pendencia']:" ";
+				  
 				}}else{
 				  echo "Erro: ".mysqli_error($con);
 				}
@@ -72,6 +74,7 @@ Loja: <?php echo $loja;?>
 <b>Código da Mercadoria:</b> <?php echo $mercadoria;?><br><br>
 <b>Grife:</b> <?php echo $marca;?><br><br>
 <b>Referencia:</b> <?php echo $descricao;?><br><br>
+<b>OS:</b> <?php echo $os;?><br><br>
 <b>Nota fiscal / saida:</b> <?php echo $nota;?><br><br>
 <b>Data da venda:</b> <?php echo date('d-m-Y', strtotime($data_venda));?><br>
 
@@ -79,7 +82,26 @@ Loja: <?php echo $loja;?>
 </fieldset>
 <fieldset class="visualizacao"><legend>Dados do Assistencia</legend>
 <b>Data de abertura:</b> <?php echo date('d-m-Y', strtotime($data_chamado));?><br><br>
-<b>Avaria da Peça:</b> <?php echo $avaria;?><br><br>
+<b>Imagens anexadas:</b><?php
+	$find="SELECT * FROM  imagens where id_garantia= $id";
+	$query_imagens=mysqli_query($con, $find);
+
+ $result=mysqli_num_rows($query_imagens);
+
+ if ($result >0){
+	 foreach ($query_imagens as $dados) {
+		 
+		$imagem=$dados['nome'];
+
+		echo "<span class='mini'><a href='../upload/$id/$imagem' download><img src='../upload/$id/$imagem' style='width:100px;' title='Baixar Imagem'></a></span>";
+		
+	 }
+ }else{
+	echo " Sem imagens<br><br>";
+}
+?>
+<br><b>Pendencia:</b><?php echo $pendencia;?><br><br>
+<br><b>Avaria da Peça:</b> <?php echo $avaria;?><br><br>
 <b>Status:</b> <?php echo $status;?><br><br>
 
 

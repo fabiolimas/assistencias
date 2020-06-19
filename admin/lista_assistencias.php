@@ -25,6 +25,7 @@
             echo"<tr id='titulo'>";
             echo"<td>Loja</td>";
             echo"<td>Cod. Mercadoria</td>";
+            echo"<td>Cliente</td>";
             echo"<td>Descrição</td>";
               echo"<td>OS</td>";
             echo"<td>Nota Fiscal</td>";
@@ -48,7 +49,7 @@
             $num_paginas=ceil($rows/$limite_de_itens);
             
             $inicio=($limite_de_itens*$pagina)-$limite_de_itens;
-            $find="SELECT g.id, l.loja, g.id_mercadoria, g.descricao, g.os, g.nota_fiscal, g.data_venda, g.data_garantia, g.avaria,sg.status  FROM garantias as g join lojas as l on g.id_loja=l.id_loja join status_garantia as sg on g.id_status_garantia=sg.id_status  where g.os like '%$os%' limit $inicio, $limite_de_itens";
+            $find="SELECT g.id, l.loja, g.id_mercadoria, g.cliente, g.descricao, g.os, g.nota_fiscal, g.data_venda, g.data_garantia, g.avaria,sg.status  FROM garantias as g join lojas as l on g.id_loja=l.id_loja join status_garantia as sg on g.id_status_garantia=sg.id_status  where g.os like '%$os%' or cliente like '%$os%' limit $inicio, $limite_de_itens";
             $query=mysqli_query($con, $find);
 
 
@@ -61,6 +62,7 @@
 
                     $id=$garantias['id'];
                     $loja=$garantias['loja'];
+                    $cliente=$garantias['cliente'];
                     $mercadoria=$garantias['id_mercadoria'];
                     $descricao=$garantias['descricao'];
                     $os=$garantias['os'];
@@ -73,6 +75,7 @@
                     echo"<tr id='lista'>";
                     echo"<td>".$loja."</td>";
                     echo"<td>".$mercadoria."</td>";
+                    echo"<td>".$cliente."</td>";
                     echo"<td>".$descricao."</td>";
                     echo"<td>".$os."</td>";
                     echo"<td>".$nota."</td>";
@@ -97,6 +100,11 @@
                         echo"<td><span class='recusado'>".$status."</span></td>";
 
                         break;
+                        case "Pendencia":
+                            echo"<td><span class='pendencia'>".$status."</span></td>";
+    
+                            break;
+    
 
 
 

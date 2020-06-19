@@ -87,11 +87,43 @@ var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s,
 		$avaria=mb_strtoupper($_POST['avaria']);
 		$cliente=mb_strtoupper($_POST['cliente']);
 		$cpf=$_POST['cpf'];
+		$arquivo=$_FILES['arquivo'];    
 		
 
 		$persist="INSERT INTO `garantias`(`id`,  id_loja,`cliente`,`cpf`,`id_mercadoria`,`marca`, `descricao`, `os`, `nota_fiscal`, `data_venda`, `data_garantia`, `avaria`,  `id_status_garantia`) VALUES (null,'$loja','$cliente','$cpf','$mercadoria','$marca', '$descricao','$os','$nota_fiscal','$data_venda','$data_garantia','$avaria','$status_garantia')";
 		$query_persist=mysqli_query($con, $persist);
 
+		$pedido=mysqli_insert_id($con);
+		
+		
+		$destino="upload/$pedido/";
+
+		$itensEnviados=count($arquivo['tmp_name']);
+
+    if(!file_exists($destino)){
+    $salvar=mkdir($destino);
+    $salvar2=mkdir($destino);
+    
+   }else{
+       echo "pasta ja existe";
+   }
+    
+    for($i=0;$i<$itensEnviados;$i++){
+
+        $persist_img="INSERT INTO imagens (`id`, `nome`, `id_garantia`) VALUES(NULL,'".$arquivo['name'][$i]."',$pedido)";
+        $query_img=mysqli_query($con, $persist_img);          
+		
+		
+           
+            if(move_uploaded_file($arquivo['tmp_name'][$i],$destino."/".$arquivo['name'][$i])){
+
+				
+                
+               
+            }else{
+                echo "falha no envio ".mysqli_error($con);
+            }
+	}
 		if($query_persist){
 			echo "Assistencia cadastrada";
 			echo"<script>voltar()</script>";
@@ -102,7 +134,7 @@ var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s,
 
 
 
-
+	
 
 
 

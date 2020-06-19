@@ -27,7 +27,7 @@
 			<li class="nav-item"><a class="nav-link" href="../opcoes.php">Encadernadora</a></li>
 			<li class="nav-item"><a  class="nav-link" href="#">Molduraria</a></li>
 			<li class="nav-item"><a  class="nav-link" href="https://www.fotoimagem.com.br" target="_blank">Site Foto Imagem </a></li>
-			<li class="nav-item"><a  class="nav-link" href="assistencia.php">Assistências Ótica</a></li>
+			<li class="nav-item"><a  class="nav-link" href="index.php">Assistências Ótica</a></li>
 			
 		</ul>
 
@@ -44,7 +44,7 @@
 	
 	
 		Buscar: 
-		<input type="text" class="form-control" name="buscar" placeholder="Número da OS" title="Buscar pelo número da OS" id="buscar" 
+		<input type="text" class="form-control" name="buscar" placeholder="Cliente / OS" title="Cliente/OS" id="buscar" 
 		 required>
 		
 

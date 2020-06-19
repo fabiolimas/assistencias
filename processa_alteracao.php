@@ -87,16 +87,49 @@ var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s,
 		//$status_forn=$_POST['status_fornecedor'];
 		$status_garantia=$_POST['status_garantia'];
 		$avaria=mb_strtoupper($_POST['avaria']);
+		$arquivo=$_FILES['arquivo'];
 
 		$merge="UPDATE `garantias` SET id_mercadoria='$mercadoria', marca='$marca', descricao='$descricao', os='$os', nota_fiscal='$nota_fiscal', data_venda='$data_venda', data_garantia='$data_garantia', id_status_garantia='$status_garantia', avaria='$avaria' where id='$id'";
 		$query_persist=mysqli_query($con, $merge);
 
+
+		$pedido=mysqli_insert_id($con);
+		
+		
+		$destino="upload/$id/";
+
+		$itensEnviados=count($arquivo['tmp_name']);
+
+    if(!file_exists($destino)){
+    $salvar=mkdir($destino);
+    $salvar2=mkdir($destino);
+    
+   }else{
+       echo "pasta ja existe";
+   }
+    
+    for($i=0;$i<$itensEnviados;$i++){
+
+        $persist_img="INSERT INTO imagens (`id`, `nome`, `id_garantia`) VALUES(NULL,'".$arquivo['name'][$i]."','$id')";
+        $query_img=mysqli_query($con, $persist_img);          
+		
+		
+           
+            if(move_uploaded_file($arquivo['tmp_name'][$i],$destino."/".$arquivo['name'][$i])){
+				echo"<script>voltar()</script>";
+                
+               
+            }else{
+                echo "falha no envio";
+            }
+		}
 		if($query_persist){
 			echo "Garantia Atualizada";
 			echo"<script>voltar()</script>";
 		}else{
 
 			echo "Erro: ".mysqli_error($con);
+
 		}
 
 

@@ -80,7 +80,7 @@
 	
 		<fieldset><legend>Assistências</legend>
 		Buscar: 
-		<input type="text" name="buscar" placeholder="OS" title="Buscar pela Os da ótica" id="buscar">
+		<input type="text" name="buscar" placeholder="Cliente / OS" title="Cliente / OS" id="buscar">
 		
 
 	</form><br><br>

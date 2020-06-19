@@ -52,7 +52,7 @@ var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s,
 			<li class="nav-item"><a class="nav-link" href="../opcoes.php">Encadernadora</a></li>
 			<li class="nav-item"><a  class="nav-link" href="#">Molduraria</a></li>
 			<li class="nav-item"><a  class="nav-link" href="https://www.fotoimagem.com.br" target="_blank">Site Foto Imagem </a></li>
-			<li class="nav-item"><a  class="nav-link" href="assistencia">Assistências Ótica</a></li>
+			<li class="nav-item"><a  class="nav-link" href="index.php">Assistências Ótica</a></li>
 			
 		</ul>
 
